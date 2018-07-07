@@ -62,8 +62,17 @@
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
+    
+    Events.on(mouseConstraint, 'mousedown', (event) => {
+        console.log(world.bodies);
+    });
 
     Events.on(mouseConstraint, 'mousedown', (event) => {
         var mousePosition = event.mouse.position;
         World.add(world, Bodies.circle(mousePosition.x, mousePosition.y, Common.random(10, 20), { friction: 0.00001, restitution: 0.5, density: 0.001 }))
-    })
+        world.bodies.forEach(body => {
+            if (body.position.y > 600) {
+                Composite.remove(world, body)
+            }
+        });
+    });
