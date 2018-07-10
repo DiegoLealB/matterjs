@@ -3,7 +3,8 @@
   Render = Matter.Render,
   World = Matter.World,
   Runner = Matter.Runner,
-  Bodies = Matter.Bodies;
+  Bodies = Matter.Bodies,
+  Common = Matter.Common;
 
   // create engine
   var engine = Engine.create(),
@@ -30,7 +31,7 @@
   Runner.run(runner, engine);
 
   // adding a single test ball
-  var p = new Particle(400, 50, 10);
+  var p = new Particle(400, 50, 30);
 
   // adding boundries
   var floor = new Boundary(width / 2, height, width, 20, Math.PI);
@@ -53,5 +54,4 @@
       pegs.push(new Peg(x, y, 5))
     }
   }
-  console.log(pegs);
   World.add(world, pegs)
