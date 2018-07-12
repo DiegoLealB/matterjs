@@ -4,6 +4,9 @@
   World = Matter.World,
   Runner = Matter.Runner,
   Bodies = Matter.Bodies,
+  MouseConstraint = Matter.MouseConstraint,
+  Mouse = Matter.Mouse,
+  Events = Matter.Events,
   Common = Matter.Common;
 
   // create engine
@@ -12,7 +15,7 @@
 
   // create renderer
   const width = 800;
-  const height = 600;
+  const height = 700;
 
   var render = Render.create({
     element: document.body,
@@ -31,17 +34,17 @@
   Runner.run(runner, engine);
 
   // adding a single test ball
-  var p = new Particle(400, 50, 30);
+  // var p = new Particle(400, 50, 30);
 
   // adding boundries
   var floor = new Boundary(width / 2, height, width, 20, Math.PI);
   var eastWall = new Boundary(width, height / 2, 20, height, Math.PI * 2);
-  var westWall = new Boundary(0, height / 2, 20, height, Math.PI * 1);
-
-  // const walls = [
-  //   new Boundary(0, 130, 10, 100, Math.PI * 0.8),
-  //   new Boundary(0, 220, 10, 100, Math.PI * 1.2),
-  // ]
+  var westWall = new Boundary(0, height / 2, 20, height, Math.PI);
+  for (let i = 0; i < width; i+= width / 8) {
+    var slots = [
+      new Boundary(i, height - 50, 10, 100, Math.PI)
+    ]
+  }
 
 
   // adding pegs
@@ -61,3 +64,23 @@
     }
   }
   World.add(world, pegs)
+
+  // add mouse control
+  var mouse = Mouse.create(render.canvas),
+      mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+          stiffness: 0.2,
+          render: {
+            visible: true
+          }
+        }
+      });
+  World.add(world, mouseConstraint);
+  render.mouse = mouse;
+
+  // create a new ball on each mouse click
+  Events.on(mouseConstraint, 'mousedown', (event) => {
+    var mousePosition = event.mouse.position;
+    World.add(world, new Particle(mousePosition.x, mousePosition.y, 30))
+  });
