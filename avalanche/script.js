@@ -62,6 +62,14 @@
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
+
+    world.bodies.forEach(body => {
+        if (body.position.x < 0) {
+            body.position.x === 800;
+        } else if (body.position.x > 800) {
+            body.position.x = 0;
+        }
+    })
     
     Events.on(mouseConstraint, 'mousedown', (event) => {
         console.log(world.bodies);
