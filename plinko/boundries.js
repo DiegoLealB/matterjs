@@ -10,5 +10,4 @@ function Boundary(x, y, w, h, a) {
   this.w = w;
   this.h = h;
   World.add(world, this.body);
-  // World.add(engine.world, this.body);
 }

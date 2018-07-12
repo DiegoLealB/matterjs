@@ -36,7 +36,13 @@
   // adding boundries
   var floor = new Boundary(width / 2, height, width, 20, Math.PI);
   var eastWall = new Boundary(width, height / 2, 20, height, Math.PI * 2);
-  var westWall = new Boundary(0, height / 2, 20, height, Math.PI * 2);
+  var westWall = new Boundary(0, height / 2, 20, height, Math.PI * 1);
+
+  // const walls = [
+  //   new Boundary(0, 130, 10, 100, Math.PI * 0.8),
+  //   new Boundary(0, 220, 10, 100, Math.PI * 1.2),
+  // ]
+
 
   // adding pegs
   var pegs = [];
@@ -46,8 +52,8 @@
 
   for (let i = 0; i < rows; i++){
     for (let j = 0; j < cols; j++) {
-      var x = 50 + i * spacing;
-      var y = 50 + spacing / 2 + j * spacing;
+      var x = 50 + i * spacing; 
+      var y = 50 + spacing / 2 + j * spacing; //offsetting pegs by half their distance
       if (j % 2 == 1) {
         x = x + spacing / 2;
       }
