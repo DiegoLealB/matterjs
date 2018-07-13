@@ -38,7 +38,7 @@ var Engine = Matter.Engine,
           constraint: {
             stiffness: 0.2,
             render: {
-              visible: false
+              visible: true
             }
           }
         });
